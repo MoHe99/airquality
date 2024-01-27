@@ -6,78 +6,48 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "air_quality_forecasts")
 public class AirQualityForecast {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "city_index", referencedColumnName = "station_index", nullable = false)
-    private City city;
+    @Column(name = "city_station_index", nullable = false)
+    private Long cityStationIndex;
 
-    private LocalDate date;
-    private String pollutant;
-    private Integer min;
-    private Integer max;
-    private Integer avg;
+    @Column(name = "forecast_date")
+    private LocalDate forecastDate;
 
-    public AirQualityForecast() {
-    }
+    @Column(name = "o3")
+    private Double o3;
 
-    // Getter und Setter
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "pm10")
+    private Double pm10;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "pm25")
+    private Double pm25;
 
-    public City getCity() {
-        return city;
-    }
+    public AirQualityForecast() {}
 
-    public void setCity(City city) {
-        this.city = city;
-    }
+    public Long getId() { return id; }
 
-    public LocalDate getDate() {
-        return date;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+    public Long getCityStationIndex() { return cityStationIndex; }
 
-    public String getPollutant() {
-        return pollutant;
-    }
+    public void setCityStationIndex(Long cityStationIndex) { this.cityStationIndex = cityStationIndex; }
 
-    public void setPollutant(String pollutant) {
-        this.pollutant = pollutant;
-    }
+    public LocalDate getForecastDate() { return forecastDate; }
 
-    public Integer getMin() {
-        return min;
-    }
+    public void setForecastDate(LocalDate forecastDate) { this.forecastDate = forecastDate; }
 
-    public void setMin(Integer min) {
-        this.min = min;
-    }
+    public Double getO3() { return o3; }
 
-    public Integer getMax() {
-        return max;
-    }
+    public void setO3(Double o3) { this.o3 = o3; }
 
-    public void setMax(Integer max) {
-        this.max = max;
-    }
+    public Double getPm10() { return pm10; }
 
-    public Integer getAvg() {
-        return avg;
-    }
+    public void setPm10(Double pm10) { this.pm10 = pm10; }
 
-    public void setAvg(Integer avg) {
-        this.avg = avg;
-    }
+    public Double getPm25() { return pm25; }
+
+    public void setPm25(Double pm25) { this.pm25 = pm25; }
 }

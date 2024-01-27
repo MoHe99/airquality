@@ -15,8 +15,12 @@ public class AirQualityDataService {
         this.airQualityDataRepository = airQualityDataRepository;
     }
 
-    public List<AirQualityData> getLatestAirQualityForEachCity() {
+    public List<AirQualityData> getAirQualityDataLatest() {
         return airQualityDataRepository.findAllLatest();
+    }
+
+    public List<AirQualityData> getAirQualityDataByIndex(Long cityStationIndex) {
+        return airQualityDataRepository.findByCityStationIndex(cityStationIndex);
     }
 }
 

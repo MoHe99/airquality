@@ -3,7 +3,6 @@ version: "3.9"
 services:
   java_app:
     container_name: java_app
-    image: francescoxx/java_app:1.0.0
     build: .
     ports:
       - 8080:8080
@@ -12,8 +11,11 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=postgres
       - JAR_FILE=target/*.jar
+      - AIR_QUALITY_API_TOKEN=${AIR_QUALITY_API_TOKEN}
     depends_on:
       - java_db
+    networks:
+      - java_network
 
   java_db:
     container_name: java_db
@@ -26,6 +28,12 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+      - ./db/:/docker-entrypoint-initdb.d/
+      - ./db:/db
+    networks:
+      - java_network
 volumes:
   pgdata: {}
+
+networks:
+  java_network:

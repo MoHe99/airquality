@@ -15,10 +15,10 @@ public class City {
     @Column(name = "station_index", nullable = false)
     private Long stationIndex;
 
-    @Column(name = "geo_latitude")
+    @Column(name = "geo_latitude", nullable = false)
     private Double geoLatitude;
 
-    @Column(name = "geo_longitude")
+    @Column(name = "geo_longitude", nullable = false)
     private Double geoLongitude;
 
     public City() {}
