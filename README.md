@@ -1,46 +1,45 @@
 # AirQuality-API
+This is a simple API that was first conceptual designed in UML as a class diagram. It that fetches real airquality data that comes from AQICN several times a day and saves them in a PosgreSQL database. The provided enpoints then allow to fetch data to cities, their airquality and their airquality forecasts. The database will be initially prefilled with mock data.
 
-## Überblick
+## Prerequisites
+Before you begin, ensure you have
 
-Die AirQuality-API ermöglicht den Zugriff auf Luftqualitätsdaten für verschiedene Städte. Es bietet aktuelle Messungen, historische Daten und Vorhersagen zur Luftqualität, die aus der AQICN-Datenbank stammen.
+- docker
+- maven
 
-## Vorbereitung
+installed on your system. These tools are necessary for installing dependencies and running the application locally.
 
-### Schritt 1: API-Token beschaffen
+## Getting started
+1. **Get API-Token**
 
-Beschaffen Sie sich einen API-Token von AQICN unter folgendem Link:
+Get a API-Token from AQICN using the following link:
 [AQICN Token](https://aqicn.org/data-platform/token/de/).
 
-### Schritt 2: .env-Datei erstellen
+2. **Create environment variables**
 
-Kopieren Sie die `.sample.env`-Datei und benennen Sie sie in `.env` um. Tragen Sie Ihren API-Token als Wert für `AIR_QUALITY_API_TOKEN` ein.
+Create a file in the root directory named .env and copy the content of .env.sample in it. Fill `AIR_QUALITY_API_TOKEN` with your token.
 
-### Schritt 3: Jar-Datei bauen
+3. **Build the .jar file**
 
-Bauen Sie die Jar-Datei mit Maven: \
+Build the .jar file with maven:
+
 `./mvnw clean package`
 
-### Schritt 4: Docker-Container starten
+4. **Start the application**
 
-Starten Sie die Anwendung mit Docker Compose: \
-`docker-compose up -d`
+Launch the application using `docker-compose up -d`. This command builds all containers and starts them.
 
-## API-Dokumentation
+## API-Information
+### Endpoints
 
-### Endpunkte
+- `/cities`: List of all available city data
+- `/airquality-data/latest`: Latest airquality data of each city
+- `/airquality-data/{cityStationIndex}`: All airquality data of one city
+- `/airquality-forecast/{cityStationIndex}`: Airquality forecast data of one city
 
-- `/cities`: Liste aller verfügbaren Stadtdaten.
-- `/airquality-data/latest`: Aktuellste Luftqualitätsmessungen für jede Stadt.
-- `/airquality-data/{cityStationIndex}`: Alle Messungen für eine bestimmte Stadt.
-- `/airquality-forecast/{cityStationIndex}`: Luftqualitätsvorhersagen für eine bestimmte Stadt.
+### Data refreshing
 
-## Datenaktualisierung
+The data in the postgres database will be refreshed daily at 0, 6, 12 and 18 o clock.
 
-Die Daten in der PostgreSQL-Datenbank werden täglich um 0, 6, 12 und 18 Uhr aktualisiert.
-
-## Hinweise
-
-- Docker muss auf Ihrem System installiert und konfiguriert sein.
-- Maven ist für den Bau des Projekts erforderlich.
-- Die Basis-URL der API lautet: `http://localhost:8080`
-- Die Datenbank wird mit automatisch mit einigen Test-Daten befüllt
+> [!IMPORTANT]
+> This project serves as a personal training and small showcase project. It is intended for my own educational purposes and to demonstrate my skills and interests in software conception and development. It's not aimed at wide distribution or commercial use. Contributions, feedback, and suggestions are welcome. The project was primarily a learning endeavor aimed at improving my skills in designing a software system with UML class diagrams and implementing it afterwards.
